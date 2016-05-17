@@ -1,0 +1,113 @@
+<html>
+<head>
+	<title>Chat with socket.io and node.js by bbk</title>
+	<style>
+		#chat{
+			height:500px;
+		}
+		
+		
+		#chatWrap{
+		float:left;
+		border:1px #000 solid;
+		}
+		#contentWrap{
+		display:none;
+		}
+		
+		.error{
+		color:red;
+		
+		}
+		.whisper{
+		color:blue;
+		font-style:italic;
+		}
+		.msg1{
+		color:blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="nickWrap">
+		<p>Enter a username:</p>
+		<p id="nickError"></p>
+		<form id="setNick">
+			<input size="35" id="nickname"></input>
+			<input type="submit"></input>
+		</form>
+	</div>
+
+	<div id="contentWrap">
+		<div id="chatWrap">
+			<div id="chat" style="overflow-y:scroll;white-space: nowrap;"></div>
+			<form id="send-message">
+				<input size="35" id="message"></input>
+				<input type="submit"></input>
+			</form>
+		</div>
+		<div id="users"></div>
+	</div>
+	<!--Close of div contentWrap-->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		jQuery(function($){
+			var socket = io.connect();
+			var $messageForm = $('#send-message');
+			var $messageBox = $('#message');
+			var $chat = $('#chat');
+			 
+			 var $nickForm =$('#setNick');
+			 var $nickError =$('#nickError');
+            var  $nickBox = $('#nickname');
+			var $users= $('#users');
+			$nickForm.submit(function(e){
+			e.preventDefault();
+			socket.emit('new user',$nickBox.val(),function(data){
+			
+			   //if we got true for server
+			   if(data){
+			   $('#nickWrap').hide();
+			   $('#contentWrap').show();
+			   
+			   
+			   }else{
+			   $nickError.html('user name already taken try again!');
+			   }
+			
+			
+			   });
+			   $nickBox.val('');
+			});
+			
+			socket.on('nicknames',function(data){
+			var html = '';
+			for(var i=0;i<data.length;i++){
+			html += data[i]+"<br/>";
+			}
+			$users.html(html);
+			});
+			
+			
+			
+			$messageForm.submit(function(e){
+				e.preventDefault();
+				socket.emit('send message', $messageBox.val(),function(data){
+				//add stuff later...
+				$chat.append("<br /><b><span class='error'>" + data +"<br/></span>");
+				});
+				$messageBox.val('');
+			});
+			
+			socket.on('new message', function(data){
+				$chat.append("<br /><b><span class='msg1'>" + data.nick + "</b>: "+data.msg +"<br/></span>");
+			});
+			
+			socket.on('whisper', function(data){
+				$chat.append("<br /><b><span class='whisper'>" + data.nick + "</b>: "+data.msg +"<br/></span>");
+			});
+		});
+	</script>
+</body>
+</html>

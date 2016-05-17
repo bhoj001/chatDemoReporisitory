@@ -1,0 +1,32 @@
+Contrary to popular belief, Lorem Ipsum is not simply random text. 
+It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
+consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, 
+discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
+(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very 
+popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 
+1.10.32.
+
+
+
+       
+  ************** Exception Text ************** 
+
+ System.DllNotFoundException: Unable to load DLL 'sqlite3': The  specified       module could not be found. (Exception from HRESULT: 0x8007007E)
+        at Finisar.SQLite.sqlite3.sqlite3_open(IntPtr filename, IntPtr& db)
+        at Finisar.SQLite.sqlite3.open(String filename)
+        at Finisar.SQLite.SQLiteConnection.Open()
+        at WFA_SQLit_Test.Form1.button1_Click(Object sender, EventArgs e)
+       at System.Windows.Forms.Control.OnClick(EventArgs e)
+       at System.Windows.Forms.Button.OnClick(EventArgs e)
+       at System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+         at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons      button, Int32 clicks)
+  at System.Windows.Forms.Control.WndProc(Message& m)
+  at System.Windows.Forms.ButtonBase.WndProc(Message& m)
+ at System.Windows.Forms.Button.WndProc(Message& m)    
+  at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)  
+at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+     at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg      IntPtr wparam, IntPtr lparam)
+
+
+ 

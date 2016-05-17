@@ -1,0 +1,1 @@
+{  "name": "chat",  "version": "1.0.0",  "description": "This is a web based chat application for hotrooms.com",  "main": "app.js",  "private":"true",  "scripts": {    "test": "npm install express --save"  },  "author": "nishant karki",  "license": "ISC",  "dependencies": {    "socket.io":"1.3.7",    "express": "4.13.3"  }}
